@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request
 from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
+from email_util import fetch_app_status, determine_status
 
 app = Flask(__name__)
 Scss(app)
@@ -10,14 +11,18 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db = SQLAlchemy(app)
 
 
-class MyTask(db.Model):
+class JobApps(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(100), nullable=False)
-    complete = db.Column(db.Integer, default=0)
-    created = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    company = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    role = db.Column(db.String(100), nullable=False)
+    status = db.Column(db.String(20), default="pending")
+    notes = db.Column(db.Text)
+    applied_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    last_updated = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     def __repr__(self) -> str:
-        return f"Task {self.id}"
+        return f"<JobApp {self.id} {self.company} - {self.role}>"
 
 
 # Routes to Webpage
@@ -26,10 +31,19 @@ class MyTask(db.Model):
 def index():
     # Add a Task
     if request.method == "POST":
-        current_task = request.form['content']
-        new_task = MyTask(content=current_task)
+        company = request.form['company']
+        email = request.form['email']
+        role = request.form['role']
+        notes = request.form.get('notes')  # optional
+
+        new_app = JobApps(
+            company=company,
+            email=email,
+            role=role,
+            notes=notes
+        )
         try:
-            db.session.add(new_task)
+            db.session.add(new_app)
             db.session.commit()
             return redirect("/")
         except Exception as e:
@@ -37,15 +51,15 @@ def index():
             return f"ERROR: {e}"
     # See all current tasks
     else:
-        tasks = MyTask.query.order_by(MyTask.created).all()
-        return render_template('index.html', tasks=tasks)
+        apps = JobApps.query.order_by(JobApps.applied_at).all()
+        return render_template('index.html', apps=apps)
 
 # Delete an Item
 @app.route("/delete/<int:id>")
 def delete(id:int):
-    delete_task = MyTask.query.get_or_404(id)
+    delete_app = JobApps.query.get_or_404(id)
     try:
-        db.session.delete(delete_task)
+        db.session.delete(delete_app)
         db.session.commit()
         return redirect("/")
     except Exception as e:
@@ -54,16 +68,29 @@ def delete(id:int):
 # Edit an item
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id:int):
-    task = MyTask.query.get_or_404(id)
+    appl = JobApps.query.get_or_404(id)
     if request.method == "POST":
-        task.content = request.form['content']
+        appl.notes = request.form['notes']
         try:
             db.session.commit()
             return redirect("/")
         except Exception as e:
             return f"Error:{e}"
     else:
-        return render_template('edit.html', task=task)
+        return render_template('edit.html', app=appl)
+
+# Refresh status of item 
+@app.route("/refresh/<int:id>")
+def refresh(id:int):
+    appl = JobApps.query.get_or_404(id)
+    body = fetch_app_status(appl.email)
+    appl.status = determine_status(body)
+    try:
+        db.session.commit()
+        return redirect("/")
+    except Exception as e:
+        return f"Error:{e}"
+
 
 # Runner and Debugger
 if __name__ in "__main__":
