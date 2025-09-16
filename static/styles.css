@@ -2,23 +2,21 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: grey;
+  background-color: #1e1e2f;
 }
 
 .content {
-  max-width: 800px;
+  max-width: -moz-max-content;
+  max-width: max-content;
   margin: 50px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #2c2c3e;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-.content h1 {
-  color: #0056b3;
-}
-.content h4 {
-  color: #666;
+.content h1, .content h2, .content h3 {
+  color: #e4e4eb;
 }
 .content table {
   width: 100%;
@@ -27,36 +25,53 @@ body {
 }
 .content table th, .content table td {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #3a3a4f;
+  color: #e4e4eb;
+  font-size: 18px;
 }
 .content table th th, .content table td th {
-  background-color: #f0f0f0;
-  color: #333;
+  color: #e4e4eb;
 }
 .content a {
   display: inline-block;
   padding: 8px 16px;
   margin: 5px;
   border-radius: 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #9ca3af;
+  color: #e4e4eb;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 .content a:hover {
-  background-color: #0056b3;
+  background-color: #3a3a4f;
 }
-.content input {
+.content #delete {
+  background-color: #dc2626;
+}
+.content #delete:hover {
+  background-color: #681212;
+}
+.content input, .content textarea {
   padding: 10px;
   margin: 5px;
-  border: solid 1px;
-  border-radius: 5px;
+  border: solid 1px #3a3a4f;
+  border-radius: 8px;
+  background-color: #2c2c3e;
+  color: #e4e4eb;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+.content input:focus, .content textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 4px #3b82f6;
 }
 .content #btn_add {
-  background-color: #28a745;
-  color: #fff;
+  background-color: #3b82f6;
+  color: #e4e4eb;
   cursor: pointer;
 }
 .content #btn_add:hover {
-  background-color: #218838;
+  background-color: #0056b3;
 }/*# sourceMappingURL=styles.css.map */

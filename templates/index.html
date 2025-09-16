@@ -10,7 +10,7 @@
     <h1>Job Tracker</h1>
 
     {% if apps | length < 1%}
-    <h3>There are no applications... Add one here!</h3>
+    <h3>There are no applications</h3>
     {% else %}
     <table>
         <tr>
@@ -29,7 +29,7 @@
                 <td>{{app.applied_at.strftime("%Y-%m-%d")}}</td>
                 <td>{{app.last_updated.strftime("%Y-%m-%d")}}</td>
                 <td>
-                    <a href="/delete/{{app.id}}">Delete</a>
+                    <a href="/delete/{{app.id}}" id="delete">Delete</a>
                     <br/>
                     <a href="/edit/{{app.id}}">Edit</a>
                     <a href="/refresh/{{app.id}}">Refresh</a>
