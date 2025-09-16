@@ -1,10 +1,10 @@
 // Color Variables 
-
-$add-btn-color: #3b82f6; //GOOD
-$add-btn-hover-color: #0056b3; //GOOD
-$bg_color: #1e1e2f; //GOOD
-$table_bg_color: #2c2c3e; //GOOD
-$text_color: #e4e4eb; //GOOD
+$border_color: #3a3a4f;
+$add-btn-color: #3b82f6;
+$add-btn-hover-color: #0056b3;
+$bg_color: #1e1e2f;
+$table_bg_color: #2c2c3e; 
+$text_color: #e4e4eb; 
 
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -36,7 +36,7 @@ body {
 
         th,td {
             padding: 10px;
-            border: 1px solid #3a3a4f;
+            border: 1px solid $border_color;
             color: $text_color;
             font-size: 18px;
 
@@ -57,7 +57,7 @@ body {
         transition: background-color 0.3s ease;
 
         &:hover {
-            background-color: #3a3a4f;
+            background-color: $border_color;
         }
     }
     #delete {
@@ -70,7 +70,7 @@ body {
     input, textarea {
         padding: 10px;
         margin: 5px;
-        border: solid 1px #3a3a4f;
+        border: solid 1px $border_color;
         border-radius: 8px;
         background-color: $table_bg_color;
         color: $text_color;
