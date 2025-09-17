@@ -1,8 +1,8 @@
-...
+---
 # Job Application Tracker 
 A Personal web app to track job and internship applications. It can update application status by scanning your email inbox. 
 
-...
+---
 ## Features
 
 - Add and track an application with company name, role, recuiter email, and optional notes.
@@ -11,12 +11,14 @@ A Personal web app to track job and internship applications. It can update appli
 - Secure setup with .env for storing email credentials.
 - One-command local launch using a custom script. 
 
-...
+---
 ## Setup
 
 1. Clone the repository
-`git clone https://github.com/YOUR_USERNAME/job-tracker.git
-cd job-tracker`
+```bash 
+git clone https://github.com/YOUR_USERNAME/job-tracker.git
+cd job-tracker
+```
 
 2. Create virtual env
 ```bash
@@ -25,7 +27,9 @@ source env/bin/activate
 ```
 
 3. Install the dependencies
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
 4. Create a `.env` file with your email credentials
 ```
@@ -35,13 +39,17 @@ EMAIL_PASS=app_password
 note: Use a generated app password (not your main password).
 
 5. Initialize the database 
-`python3 app.py`
+```bash
+python3 app.py
+```
 
 6. Run the app using the shell script
-`./run_app.sh`
+```bash
+./run_app.sh
+```
 This will launch the web app in your browser.
 
-...
+---
 ## Screenshots
 
 ### Homepage (Empty)
@@ -53,11 +61,12 @@ This will launch the web app in your browser.
 ### Edit Page
 ![Edit Page](assets/edit_page.png)
 
-...
+---
 ## Upcoming Features
 
 - Filtering and search for applications
 - Automatic status updates 
 - Authentication 
 
+---
 
