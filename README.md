@@ -16,7 +16,7 @@ A Personal web app to track job and internship applications. It can update appli
 
 1. Clone the repository
 ```bash 
-git clone https://github.com/YOUR_USERNAME/job-tracker.git
+git clone https://github.com/AaronPazCastelan/job-tracker.git
 cd job-tracker
 ```
 
