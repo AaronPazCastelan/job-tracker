@@ -40,3 +40,7 @@ instance/
 .idea/
 *.swp
 
+# Build artifacts
+build/
+dist/
+*.spec

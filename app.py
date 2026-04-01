@@ -3,6 +3,9 @@ from flask_scss import Scss
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
 from email_util import fetch_app_status, determine_status
+import webview
+import threading
+import sys
 
 app = Flask(__name__)
 Scss(app)
@@ -91,10 +94,25 @@ def refresh(id:int):
     except Exception as e:
         return f"Error:{e}"
 
+def run_flask():
+    app.run(port=5000, debug=False, use_reloader=False)
 
-# Runner and Debugger
 if __name__ in "__main__":
     with app.app_context():
         db.create_all()
 
-    app.run(debug=True)
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
+
+    
+    window = webview.create_window(
+        'Job Application Tracker', 
+        'http://127.0.0.1:5000',
+        width=1000,
+        height=800
+    )
+
+    
+    webview.start()
+    sys.exit()
