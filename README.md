@@ -65,10 +65,13 @@ A personal macOS desktop application to track job and internship applications. I
 
 ## Screenshots
 
-### Desktop App Window
-![Desktop App Window](assets/desktop_app.png)
+### Homepage (Empty)
+![Homepage_Empty](assets/homepage_empty.png)
 
-### Edit Application Notes
+### Homepage
+![Homepage](assets/homepage.png)
+
+### Edit Page
 ![Edit Page](assets/edit_page.png)
 
 ---
