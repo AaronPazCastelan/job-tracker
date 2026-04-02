@@ -1,72 +1,81 @@
----
-# Job Application Tracker 
-A Personal web app to track job and internship applications. It can update application status by scanning your email inbox. 
+# Job Application Tracker
+
+A personal macOS desktop application to track job and internship applications. It can update application status by scanning your email inbox for specific keywords to determine if you've been accepted or rejected.
 
 ---
+
 ## Features
 
-- Add and track an application with company name, role, recuiter email, and optional notes.
-- Update status by scanning emails.
-- Edit notes for each application. 
-- Secure setup with .env for storing email credentials.
-- One-command local launch using a custom script. 
+- **Native macOS App:** Launch the tracker directly from your Dock as a standalone window.
+- **Email Status Sync:** Automatically update application status by scanning recruiter emails.
+- **Application Management:** Add and track company names, roles, recruiter emails, and custom notes.
+- **Secure Credentials:** Utilizes a `.env` file to keep your email app passwords safe.
+- **No Browser Required:** Uses a native window wrapper so it doesn't clutter your web browser tabs.
 
 ---
+
 ## Setup
 
-1. Clone the repository
-```bash 
-git clone https://github.com/AaronPazCastelan/job-tracker.git
-cd job-tracker
-```
-
-2. Create virtual env
+1. **Clone the repository**
 ```bash
-python3 -m venv env
-source env/bin/activate
+   git clone https://github.com/AaronPazCastelan/job-tracker.git
+   cd job-tracker
 ```
 
-3. Install the dependencies
+2. **Create virtual env**
 ```bash
-pip install -r requirements.txt
+   python3 -m venv env
+   source env/bin/activate
 ```
 
-4. Create a `.env` file with your email credentials
-```
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=app_password
-```
-note: Use a generated app password (not your main password).
-
-5. Initialize the database 
+3. **Install the dependencies**
 ```bash
-python3 app.py
+   pip install -r requirements.txt
+   pip install py2app
 ```
 
-6. Run the app using the shell script
+4. **Set up your environment variables**
+   Copy the example file and fill in your credentials:
 ```bash
-./run_app.sh
+   cp .env.example .env
 ```
-This will launch the web app in your browser.
+   Then open `.env` and replace the placeholder values:
+```
+   EMAIL_USER=your_email@gmail.com
+   EMAIL_PASS=your_app_password
+```
+   > **Note:** Use a generated app password (not your main password).
 
 ---
+
+## Making it a Mac App
+
+1. **Build the application**
+```bash
+   python3 setup.py py2app
+```
+
+2. **Install to Applications**
+   Open the newly created `dist/` folder and drag `Job Tracker.app` into your Applications folder.
+
+3. **Add to Dock**
+   Drag the app from your Applications folder onto your Dock for easy one-click access.
+
+---
+
 ## Screenshots
 
-### Homepage (Empty)
-![Homepage_Empty](assets/homepage_empty.png)
+### Desktop App Window
+![Desktop App Window](assets/desktop_app.png)
 
-### Homepage
-![Homepage](assets/homepage.png)
-
-### Edit Page
+### Edit Application Notes
 ![Edit Page](assets/edit_page.png)
 
 ---
+
 ## Upcoming Features
 
 - Filtering and search for applications
-- Automatic status updates 
-- Authentication 
-
----
-
+- Automatic background status updates
+- Support for multiple email accounts
+- Increase status accuracy
